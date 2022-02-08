@@ -1,0 +1,246 @@
+\documentclass{article}
+\usepackage[landscape]{geometry}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb}
+\usepackage{mathrsfs}
+
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\makeatletter
+
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\title{MAE 143B Equation Sheet}
+\author{Jonathan L. Moran (ax007859)}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+
+\advance\topmargin-.8in
+\advance\textheight3in
+\advance\textwidth3in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+%\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
+
+\begin{document}
+\begin{center}{\huge{\textbf{MAE 143B Equation Sheet}}}\\
+\end{center}
+\begin{multicols*}{3}
+
+\tikzstyle{mybox} = [draw=black, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=black, text=white, font=\bfseries]
+
+%------------ Galileo's Inclined Plane Model ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        $h$, fall height (ft)\\
+        $d$, horizontal travel distance (in)${}^{*}$, \\
+        $l$, length of inclined plane (ft), \\
+        $y$, vertical distance${}^{*}$. \\
+        \\
+    MATLAB commands:
+    \\
+    \small{
+    	\begin{tabular}{lp{4cm} l} \hline
+    	\textit{Fitting linear model} &     $f = \texttt{fit(d, h, 'poly1')}$. \\ \hline
+    	\textit{Fitting quadratic model} &  $f = \texttt{fit(d, h, 'poly2')}$, \\ &
+    	                                    for $\texttt{h} = l sin(\theta)$. \\ \hline
+    \end{tabular}}
+    \\
+    \\
+    Estimating $y$:
+    \\
+    \small{
+    	\begin{tabular}{lp{4cm} l} \hline
+    	\textit{Conservation of energy} &   $\frac{1}{2}mv_{x}^2 = mgh$, \\ &
+    	                                    $\Rightarrow v_x = \sqrt{2gh}$. \\ \hline
+    	\textit{Vertical motion} &          $y = \frac{1}{2}gt^2$, \\ &
+    	                                    $\Rightarrow t = \sqrt{2y / g}$. \\ \hline
+    	\textit{Horizontal motion} &        $d = v_xt$, \\ &
+    	                                    $d = \sqrt{2gh} \ctimes \sqrt{2y/g} $, \\ &
+    	                                    $\Rightarrow d^2 / 4 = yh$. \\ \hline
+    \end{tabular}}
+
+    ${}^{*}$ units converted to feet.
+    \end{minipage}
+};
+%------------ Galileo Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {P1.10 Galileo's Inclined Plane Problem};
+\end{tikzpicture}
+
+%------------ Elevator Model ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \small{
+    	\begin{tabular}{lp{5cm} l} \hline
+    	\textit{Wheels} &   $J_1\dot{\omega} + b_1{\omega} = \tau + (f_1 - f_2)r$, \\ & 
+    	                    $J_2\dot{\omega} + b_2{\omega} = \tau + (f_4 - f_3)r$. \\ \hline
+		\textit{Forces from $J_1$} &    $f_1 + m_1\dot{v_1} = m_1g + f_3$. \\ \hline
+        \textit{Forces from $J_2$} &    $f_2 + m_2\dot{v_2} = m_2g + f_4$. \\ \hline
+        \textit{Angular velocity}  &    $v_1 = r\omega, v_2 = -r\omega$. \\ \hline
+	\end{tabular}}
+
+    \begin{equation}
+        (J_1 + J_2 + r^2(m_1 + m_2))\dot{\omega} + (b_1 + b_2)\omega =  \tau + gr(m_1 - m_2) \\
+    \end{equation}
+    \\ ODE solution:
+    \begin{equation}
+        v_1(t) = \Tilde{v_1}(1 - e^{\lambda t}) + v_1(0)e^{\lambda t}, \\
+    \end{equation}
+    Furthermore:
+    \begin{align*}
+        \Bar{v_1} = v_1(t)_{t\rightarrow\infty}, TC = -\frac{1}{\lambda}.
+    \end{align*}
+
+    \small{
+    	\begin{tabular}{lp{5cm} l} \hline
+    	\textit{Steady state error} &   $e_{SS} = \Bar{v_1} - v_{SS} = \Bar{v_1} - \Tilde{v_1}$. \\ \hline
+		\textit{Open loop} &    $\lambda_{OL} = -\frac{a}{b}$, \\ & 
+                                $\Bar{v_1} = \frac{r}{b}[\tau + gr(m_1 - m_2)]$, \\ &
+                                $TC_{OL} = -\frac{1}{\lambda_{OL}}$. \\ \hline
+        \textit{Closed loop} &  $\tau(t) = K(\Bar{v_1} - v_1(t))$ \textit{controller} \\ &
+                                $\lambda_{CL} = -\frac{(b + Kr)}{a}$, \\ & 
+                                $\Tilde{v_1} = \frac{r}{b + Kr}[K\Bar{v_1} + gr(m_1 - m_2)]$, \\ &
+                                $TC_{OL} = -\frac{1}{\lambda_{OL}}$, \\ &
+                                $K = \frac{a - 5b}{5r}$.
+	\end{tabular}}
+    
+    
+    
+    \end{minipage}
+};
+%------------ Elevator Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {P2.10 Elevator Problem};
+\end{tikzpicture}
+
+%------------ Frequency-Response Method ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \small{
+    	\begin{tabular}{lp{6cm} l} \hline
+    	\textit{Input} &   
+    	$u(t) = A\cos{\omega t + \phi}$, \\ \hline
+		\textit{Response} &    
+		$y_{ss}(t) = A\vert G(j\omega)\vert cos(\omega t + \phi + \angle G(j \omega))$. \\ \hline
+		\textit{Phase angle} &    
+		$\angle G(j\omega) = \arctan{(\frac{\Im{G(j\omega)}}{\Re{G(j\omega)}})}$, \\ &
+		$\angle G(j\omega) = \angle N\{G(j\omega)\} - \angle D\{G(j\omega)\}$. \\ \hline
+	\end{tabular}}
+	
+    \textrm{For a LTI system without poles on the imaginary axis, i.e.,} $G_0(s) = 0$.
+    \end{minipage}
+};
+%------------ Frequency-Response Method Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {3.8 Frequency Response};
+\end{tikzpicture}
+
+%------------ Feedback with Disturbances Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \small{
+    	\begin{tabular}{lp{4cm} l}
+		\textit{Closed-loop system} & \textit{For inputs} \\ \hline
+		\\ $y = G(u + w)$,          & $y = H\bar{y} - Hv + Dw$, \\
+        \\ $u = K\Tilde{e}$,        & $u = Q\bar{y} - Qv - Hw$. \\
+        \\ $\Tilde{e} = \Tilde{y} - (y + v)$. & with measurement noise $v$.
+		\\ \hline
+		\textit{Tracking error} & $e = \bar{y} - y = S\bar{y} + Hv - Dw$.
+		\\ \hline
+		\textit{Sensitivity} & i.e., from $\bar{v_1} \textrm{   to} \textrm{   } e $ \\
+		& $S = \frac{1}{1 + GK}$ \\
+		Asymptotic tracking & if $S$ has a zero at $s = 0$. 
+		\\ \hline
+		\textit{Disturbance} & i.e., from $w  \textrm{   to} \textrm{   } e$ \\
+		& $ D = GS = \frac{G}{1 + GK}$ \\
+		Asymptotic & if $D$ has a zero at $s = 0$, or \\
+		disturbance rejection & if controller $K$ has pole at the origin, i.e., $s = j\omega$ (in frequency domain). 
+		\\ \hline
+		\textit{H} & i.e., from $\bar{v_1} \textrm{   to} \textrm{   } v_1$ \\
+		& $ H = GKS = \frac{GK}{1 + GK}. $
+		\\ \hline
+		\textit{Q} & $ Q = GS = \frac{K}{1 + GK}. $
+		\\
+	\end{tabular}}
+    \end{minipage}
+};
+%------------ Feedback with Disturbances Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {4.4 Feedback with Disturbances};
+\end{tikzpicture}
+
+%------------ Laplace Transforms Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    $L[f](s) = \int_0^{\infty} e^{-sx}f(x)dx $\\
+    
+    \small{
+    	\begin{tabular}{lp{4cm} l}
+        $f(t) = t^n, n \geq 0 $ &$F(s) = \frac{n!}{s^{n+1}}, s > 0 $ \\
+        $f(t) = e^{at}, a \textit{ constant}$ & $ F(s) = \frac{1}{s-a}, s > a$ \\
+        $f(t) = \sin{bt}, b \textit{ constant}$ & $ F(s) = \frac{b}{s^2 + b^2}, s > 0$ \\
+        $f(t) = \cos{bt}, b \textit{ constant}$ & $ F(s) = \frac{s}{s^2 + b^2}, s > 0$ \\
+        $f(t) = t^{-1/2}$ & $F(s) = \frac{\pi}{s^{1/2}}, s > 0$ \\
+        $f(t) = \delta(t-a)$ & $F(s) = e^{-as}$ \\
+        $f'$ & $L[f'] = sL[f] - f(0)$ \\
+        $f''$ & $L[f''] = s^2 L[f] - sf(0) - f'(0)$ \\
+        $L[e^{at}f(t)]$ & $L[f](s-a)$ \\
+        $L[u_a(t)f(t-a)]$ & $L[f]e^{-as}$ 
+        \end{tabular}}
+    \end{minipage}
+};
+%------------ Laplace Transforms Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Laplace Transforms};
+\end{tikzpicture}
+
+
+%------------ Second-Order Systems Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \small{
+    	\begin{tabular}{lp{5cm} l} 
+    	\hline
+    	\textit{Characteristic} &
+    	$s^2 + 2\zeta \omega_{n}s + \omega_{n}^2$, \quad $\omega_{n} > 0$. \\ \textit{equation} &
+    	\\ \hline
+		\textit{Inverse Laplace} &    
+		$\mathscr{L}^{-1} = \left \{ \frac{k}{s + \zeta \omega_n - j\omega_d} + \frac{k^{*}}{s + \zeta \omega_n + j\omega_d} \right \} $ \\ \textit{Transform} &
+		$ { } = 2\vert k \vert e^{-\zeta\omega_{n}t}\cos(w_{d}t + \angle k)$
+		\\ \hline
+		\textit{Parameters} &    
+		$\omega_{d} = \omega_{n} \sqrt{1 - \zeta^2}$, \quad $0 < \zeta < 1$. \\ &
+		$\phi_{d} = \arcsin\zeta = \arctan \left( \frac{\zeta \omega_{n}}{\omega_{d}} \right)$.
+		\\ \hline
+		\textit{Step response} &
+		$G(s) = \frac{\omega_{n}^2}{s^2 + 2\zeta\omega_{n}s + \omega_{n}^2}$, \quad $\omega_{n} > 0$. \\ &
+		$y(t) = \mathsrc{L}^{-1} \left\{ \frac{G(s)}{s}\right\}$, \\ &
+		$\qquad = 1 - \frac{1}{\sqrt{1 - \zeta^2}}e^{-\zeta\omega_{n}t}\sin(\omega_{d}t + \pi/2 - \phi_{d})$
+		\\ \hline
+	\end{tabular}}
+	where $\zeta$ is the \textit{damping ratio} and $\omega_n$ is the \textit{natural frequency}.
+    \end{minipage}
+};
+%------------ Second-Order Systems Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {6.1 Second-Order Systems};
+\end{tikzpicture}
+\end{multicols*}
+\end{document}

@@ -1,4 +1,4 @@
-% Load data given in P4.23
+% Load data given in P4.28
 g = 10;                             % m/s^2
 r = 1;                              % m
 m1 = 1000;                          % kg
@@ -27,7 +27,7 @@ G = tf(G_s);
 % Time interval
 t = linspace(0, 180, 800);
 
-% Plot of the response of the system in P4.25 with unit step input
+% Plot of the response of the system in P4.28 with unit step input
 figure;
 plot(t, x_1_bar*heaviside(t));
 hold on;
