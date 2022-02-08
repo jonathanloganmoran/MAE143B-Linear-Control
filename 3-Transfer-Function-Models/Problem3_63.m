@@ -50,10 +50,12 @@ t = linspace(0, 100, 800);
 % Unit step reference input
 u = heaviside(t);
 
-% The response of the system in P2.18 to a unit step signal
+% The response of the system in P3.63 to a unit step signal
 figure;
 lsim(V_1, u, t);
 grid on;
-title('Response of system in Problem 3.62 for $\tau(t) = \tilde{\tau}$', 'Interpreter', 'latex');
+title('Response of system in Problem 3.62 for $\tau(t) = \tilde{\tau}$ (Problem 3.63)', 'Interpreter', 'latex');
 xlabel('$t(s)$', 'interpreter', 'latex');
 ylabel('$v(t) m$', 'interpreter', 'latex');
+legend('$\tau(t) = \tilde{\tau}$', 'interpreter', 'latex');
+subtitle('$m_2 = 1000 kg$', 'interpreter', 'latex');

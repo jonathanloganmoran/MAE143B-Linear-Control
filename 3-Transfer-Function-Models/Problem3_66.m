@@ -38,10 +38,12 @@ W = w;
 % Unit step reference input
 u =  (tau + w).*heaviside(t);
 
-% The response of the system in P2.18 to a unit step signal
+% The response of the system in P3.66 to a unit step signal
 figure;
 lsim(G, u, t);
 grid on;
-title('Response of system in Problem 3.66 for $\tau(t) = \tilde{\tau}$', 'Interpreter', 'latex');
+title('\rm{Response of system in Problem 3.66 for constant-torque input}', 'interpreter', 'latex');
 xlabel('$t(s)$', 'interpreter', 'latex');
 ylabel('$x(t) m$', 'interpreter', 'latex');
+legend('$\tau(t) = \tilde{\tau}$', 'interpreter', 'latex');
+subtitle('$m_2 = 1000 kg$', 'interpreter', 'latex');
