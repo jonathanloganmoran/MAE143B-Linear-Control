@@ -29,9 +29,13 @@ t = linspace(0, 180, 800);
 
 % Plot of the response of the system in P4.25 with unit step input
 figure;
+plot(t, x_1_bar*heaviside(t));
+hold on;
 u = heaviside(t);
 lsim(G, u, t);
 grid on;
 title('Response of system in Problem 4.28 for ${\bar{x_1} = 10 m}$', 'interpreter', 'latex');
+subtitle('$m_2 = 800 kg$', 'interpreter', 'latex');
+legend('$\bar{x_1} = 10 m$', '$K = 500, z = \frac{1}{2}\cdot\frac{b}{a}$', 'interpreter', 'latex');
 xlabel('$t(s)$', 'interpreter', 'latex');
 ylabel('$x(t) m$', 'interpreter', 'latex');
