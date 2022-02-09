@@ -112,7 +112,7 @@
     \small{
     	\begin{tabular}{lp{5cm} l} \hline
     	\textit{Steady state error} &   $e_{SS} = \Bar{v_1} - v_{SS} = \Bar{v_1} - \Tilde{v_1}$. \\ \hline
-		\textit{Open loop} &    $\lambda_{OL} = -\frac{a}{b}$, \\ & 
+		\textit{Open loop} &    $\lambda_{OL} = -\frac{b}{a}$, \\ & 
                                 $\Bar{v_1} = \frac{r}{b}[\tau + gr(m_1 - m_2)]$, \\ &
                                 $TC_{OL} = -\frac{1}{\lambda_{OL}}$. \\ \hline
         \textit{Closed loop} &  $\tau(t) = K(\Bar{v_1} - v_1(t))$ \textit{controller} \\ &
@@ -135,7 +135,7 @@
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
     \small{
-    	\begin{tabular}{lp{6cm} l} \hline
+    	\begin{tabular}{lp{6cm} l}
     	\textit{Input} &   
     	$u(t) = A\cos{\omega t + \phi}$, \\ \hline
 		\textit{Response} &    
@@ -144,12 +144,41 @@
 		$\angle G(j\omega) = \arctan{(\frac{\Im{G(j\omega)}}{\Re{G(j\omega)}})}$, \\ &
 		$\angle G(j\omega) = \angle N\{G(j\omega)\} - \angle D\{G(j\omega)\}$. \\ \hline
 	\end{tabular}}
-	
     \textrm{For a LTI system without poles on the imaginary axis, i.e.,} $G_0(s) = 0$.
     \end{minipage}
 };
 %------------ Frequency-Response Method Header ---------------------
 \node[fancytitle, right=10pt] at (box.north west) {3.8 Frequency Response};
+\end{tikzpicture}
+
+%------------ Tracking and Control ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \small {
+    	\begin{tabular}{lp{4cm}}
+    	\texit{Lemma 4.1} \qquad Asymptotic tracking \\ \hline
+		Let $S(s)$ be the asymptotically stable transfer function \\ $S(0) = 0$. The system asymptotic tracks a constant refer-\\ence input if the product $GK$ has a pole at the origin. \\ \hline
+    	\textit{Lemma 4.3} \qquad Internal stability \\ \hline
+		The closed-loop system is internally stable if and only if \\ $S(s)$ is asymptotically stable and any pole-zero cancellat-\\ions of the product $GK$ satisfy $\Re\{z\} < 0$. \\ \hline
+	\end{tabular}}
+	\small{
+	\begin{tabular}{lp{4cm}}
+	    \textit{Asymptotic stability} &
+		if $G(s)$ converges and is bounded for all $\Re(s) \geq 0$, i.e., $G(s)$ does not have poles on the imaginary axis or on the right-hand side of the complex plane. \\ \hline
+	    \textit{Asymptotic tracking} &
+		if $S(s)$ has a zero at $s = 0$. \\ \hline
+		\textit{Asymptotic} &
+		if $D(s)$ has a zero at $s = 0$, &
+		\textit{disturbance rejection} &
+		or the controller $K(s)$ has a pole at the origin, i.e., $s = j\omega$. \\ \hline
+		\textit{Asymptotic tracking} &
+		if $S(s)$ has a zero at $s = 0$.
+	\end{tabular}
+    \end{minipage}
+};
+%------------ Tracking and Control ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {4.1 Tracking, Sensitivity and Integral Control};
 \end{tikzpicture}
 
 %------------ Feedback with Disturbances Content ---------------
@@ -158,27 +187,24 @@
     \begin{minipage}{0.3\textwidth}
     \small{
     	\begin{tabular}{lp{4cm} l}
+		\textit{Sensitivity} & i.e., from $\bar{v_1} \textrm{   to} \textrm{   } e $ \\
+		& $S = \frac{1}{1 + GK}$
+		\\ \hline
+		\textit{Disturbance} & i.e., from $w  \textrm{   to} \textrm{   } e$ \\
+		& $ D = GS = \frac{G}{1 + GK}$
+		\\ \hline
+		\textit{Output-input} & i.e., from $\bar{v_1} \textrm{   to} \textrm{   } v_1$ \\
+		& $ H = GKS = \frac{GK}{1 + GK}. $
+		\\ \hline
+		\textit{Design} & $ Q = GS = \frac{K}{1 + GK}. $
+		\\ \hline
+		\\
 		\textit{Closed-loop system} & \textit{For inputs} \\ \hline
 		\\ $y = G(u + w)$,          & $y = H\bar{y} - Hv + Dw$, \\
         \\ $u = K\Tilde{e}$,        & $u = Q\bar{y} - Qv - Hw$. \\
         \\ $\Tilde{e} = \Tilde{y} - (y + v)$. & with measurement noise $v$.
 		\\ \hline
 		\textit{Tracking error} & $e = \bar{y} - y = S\bar{y} + Hv - Dw$.
-		\\ \hline
-		\textit{Sensitivity} & i.e., from $\bar{v_1} \textrm{   to} \textrm{   } e $ \\
-		& $S = \frac{1}{1 + GK}$ \\
-		Asymptotic tracking & if $S$ has a zero at $s = 0$. 
-		\\ \hline
-		\textit{Disturbance} & i.e., from $w  \textrm{   to} \textrm{   } e$ \\
-		& $ D = GS = \frac{G}{1 + GK}$ \\
-		Asymptotic & if $D$ has a zero at $s = 0$, or \\
-		disturbance rejection & if controller $K$ has pole at the origin, i.e., $s = j\omega$ (in frequency domain). 
-		\\ \hline
-		\textit{H} & i.e., from $\bar{v_1} \textrm{   to} \textrm{   } v_1$ \\
-		& $ H = GKS = \frac{GK}{1 + GK}. $
-		\\ \hline
-		\textit{Q} & $ Q = GS = \frac{K}{1 + GK}. $
-		\\
 	\end{tabular}}
     \end{minipage}
 };
@@ -211,6 +237,30 @@
 \node[fancytitle, right=10pt] at (box.north west) {Laplace Transforms};
 \end{tikzpicture}
 
+%------------ Pole-Zeros Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \small{
+    	\begin{tabular}{lp{5cm} l} 
+    	\textit{Sensitivity} &
+        The poles of $S(s)$ are the zeros of the characteristic equation of $S(s)$. \\ &
+        Furthermore, the zeros of $S(s)$ are the poles of the product $GK$.
+    	\\ \hline
+		\textit{GK} &
+		$ \tilde{G}\tilde{K} = \frac{ N_{\tilde{G}} N_{\tilde{K}} }{ D_{\tilde{G}} D_{\tilde{K}} } $ which have polynomial roots $N_{\tilde{G}} N_{\tilde{K}} + D_{\tilde{G}} D_{\tilde{K}} = 0$. \\ \hline
+		\textit{S} &
+		If all the roots of $\tilde{G}\tilde{K}$ have negative real parts, then $S(s) = \frac{ D_{\tilde{G}} D_{\tilde{K}} }{ N_{\tilde{G}} N_{\tilde{K}} + D_{\tilde{G}} D_{\tilde{K}}}$ and $H = 1 - S$ are asymptotically stable. \\ \hline
+		\textit{SG and SK} &
+		$SG = \frac{(s - z)}{(s - p)} \frac{ N_{\tilde{G}} N_{\tilde{K}} }{ N_{\tilde{G}} N_{\tilde{K}} + D_{\tilde{G}} D_{\tilde{K}}}$, \\ &
+		$SK = \frac{(s - p)}{(s - z)} \frac{ N_{\tilde{K}} D_{\tilde{G}} }{ N_{\tilde{G}} N_{\tilde{K}} + D_{\tilde{G}} D_{\tilde{K}}}$ \\&
+		are stable only if $p$ and $z$ are both negative.
+	\end{tabular}}
+    \end{minipage}
+};
+%------------ Pole-Zeros Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {4.7 Pole-Zero Cancellations and Stability};
+\end{tikzpicture}
 
 %------------ Second-Order Systems Content ---------------
 \begin{tikzpicture}
@@ -218,7 +268,6 @@
     \begin{minipage}{0.3\textwidth}
     \small{
     	\begin{tabular}{lp{5cm} l} 
-    	\hline
     	\textit{Characteristic} &
     	$s^2 + 2\zeta \omega_{n}s + \omega_{n}^2$, \quad $\omega_{n} > 0$. \\ \textit{equation} &
     	\\ \hline
