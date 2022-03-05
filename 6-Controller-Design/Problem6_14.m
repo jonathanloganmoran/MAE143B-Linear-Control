@@ -52,7 +52,7 @@ legend('$K_f = 10$', 'interpreter', 'latex');
 % We will now implement a closed-loop controller that can asymptotically
 % track a constant reference. Proportional gain controller will work here,
 % since our system G(s) already has a pole at zero (A.S.).
-Kp = 100;                   % A.S. when Kp > 0
+Kp = 10;                    % A.S. when Kp > 0
 K = Kp;                     % The proportional gain controller
 sys = G*K;                  % L(s)
 % Plotting the root locus of the closed-loop system
