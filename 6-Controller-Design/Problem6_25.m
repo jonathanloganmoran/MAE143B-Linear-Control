@@ -11,59 +11,42 @@
 % model, where x_s and x_u are displacements measured from equilibrium.
 
 %% Load the data in P6.25:
-k_u = 200000;                   % Tire stiffness (N/m)
+k_u = 200000;                   % Tire stiffness (Nm)
 b_u = 0;                        % Tire damping coefficient
 m_s = 600;                      % 1/4 mass of car w/o wheels (kg)
 m_u = 40;                       % Mass of a single wheel (kg)
 f_n = 2.5;                      % Natural frequency (Hz)
 w_n = 2*pi*f_n;                 % Natural frequency (rad/s)
 zeta = 0.08;                    % Damping ratio
-
+% Save the data in P6.25
+save('Problem6_25');
 %% P6.25: Select values of k_s and b_s
-k_s = 2.5*k_u;                  % Spring stiffness (N/m)
-b_s = m_s*m_u;                  % Shock absorber damping coefficient
-
-%% P6.25: The state-space form of the ODEs
-% The state matrix A
-% For state variables x' = [x; \dot{x}; z; \dot{z}];
-r1 = [0, 1, 0, 0];
-r2 = [-k_s*(m_s + m_u)/(m_s*m_u) -b_s*(m_s + m_u)/(m_s*m_u) k_u/m_s b_u/m_u];
-r3 = [0, 0, 0, 1];
-r4 = [k_s/m_u, b_s/m_u, -k_u/m_u, -b_u/m_u];
-A = [r1; r2; r3; r4];
-% The input matrix B
-% For input u = \ddot{y}
-B = [0; 0; 0; -1];
-% The output matrix C
-% for output y = \ddot{x} + \ddot{z}
-C = [0, -b_s/m_s, 0, -k_s/m_s];
-% The transition matrix D
-% For input u = \ddot{y}
-D = [-1];
-
-% The system formed by the state-space realization
-sys = ss(A, B, C, D);
+% Initialize model parameters
+syms k_s b_s
+% Substitute parameters with arbitrary values
+k_s = 2.5*k_u;                  % Spring stiffness (Nm)
+b_s = m_s*m_u;                  % Shock absorber damping coefficient (kg/s)
 
 %% P6.25: Calculate the transfer function of the system
 % from the road profile, y, to the relative displacement x + z
+sys = compute_ss(k_s, b_s);
 G = tf(sys);
 
-% Obtain the natural frequency and damping ratio
-[w_n, zeta] = damp(G);          % Should match expected values below
-
-%% Load the data in P6.25:
-k_u = 200000;                   % Tire stiffness (N/m)
-b_u = 0;                        % Tire damping coefficient
-m_s = 600;                      % 1/4 mass of car w/o wheels (kg)
-m_u = 40;                       % Mass of a single wheel (kg)
-f_n = 2.5;                      % Natural frequency (Hz)
-w_n = 2*pi*f_n;                 % Natural frequency (rad/s)
-zeta = 0.08;                    % Damping ratio
-
 %% P6.25: Select values of k_s and b_s
-% Choosing the following at random (no correlation)
-k_s = 2.5*k_u;                  % Spring stiffness (N/m)
-b_s = m_s*m_u;                  % Shock absorber damping coefficient
+% Choosing the following parameters such that the poles of G(s) have the
+% desired frequency w_n = 2*pi*f_n and damping ratio zeta = 0.08.
+[w_n, zeta] = damp(G);          % Match the expected values below
+
+% Choosing new values of parameters so the expected values match
+k_s = 460300;                   % Spring stiffness (Nm)
+b_s = 22100;                    % Shock absorber damping coefficient (kg/s)
+
+% Recompute the transfer function of the system with new parameter values
+sys = compute_ss(k_s, b_s);
+G = tf(sys);
+
+% Check if system has the desired poles
+[w_n, zeta] = damp(G);          % Match the expected values below
 
 %% P6.25: Locate all roots in the complex plane
 % Plotting the pole-zero map of the continuous second-order system
@@ -88,7 +71,7 @@ for i = 1:length(a)
 end
 ylim([-200 200]);
 title('Poles and zeros of the continuous second-order system in Problem 6.25', 'interpreter', 'latex');
-subtitle('$\omega_{n} = 5\pi rad/s, b_s = m_s*m_u, k_s = f_n*k_u, k_u = 200000 N/m, b_u = 0, m_u = 40kg, m_s = 600kg, f_n = 2.5 Hz, \zeta = 0.08$', 'interpreter', 'latex');
+subtitle('$\omega_{n} = 5\pi rad/s, b_s = 22,100 kg/s, k_s = 460,300 Nm, k_u = 200000 Nm, b_u = 0, m_u = 40kg, m_s = 600kg, f_n = 2.5 Hz, \zeta = 0.08$', 'interpreter', 'latex');
 
 % Plotting root locus of the underdamped second-order closed-loop system
 subplot(2, 1, 2);
@@ -97,4 +80,4 @@ axis equal;
 xlim([-700 50]);
 ylim([-80 80]);
 title('Root locus of underdamped second-order closed-loop system in Problem 6.25', 'interpreter', 'latex');
-subtitle('$\omega_{n} = 5\pi rad/s, b_s = m_s*m_u, k_s = f_n*k_u, k_u = 200000 N/m, b_u = 0, m_u = 40kg, m_s = 600kg, f_n = 2.5 Hz, \zeta = 0.08$', 'interpreter', 'latex');
+subtitle('$\omega_{n} = 5\pi rad/s, b_s = 22,100 kg/s, k_s = 460,300 Nm, k_u = 200000 Nm, b_u = 0, m_u = 40kg, m_s = 600kg, f_n = 2.5 Hz, \zeta = 0.08$', 'interpreter', 'latex');

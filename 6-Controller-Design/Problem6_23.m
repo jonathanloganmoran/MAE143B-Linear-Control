@@ -18,7 +18,7 @@ k = m*w_n^2;                    % Spring stiffness
 %% P6.23: Show that m\ddot{z} = u - m\ddot{y}, u = -(kz + b\dot{z}),
 % from which u can be interpreted as the output of the PD controller.
 s = tf('s');
-Z = -1 / s^2;           % The transfer function of the input Z(s) w.r.t
+Z = 1 / (m*s^2);        % The transfer function of the input Z(s) w.r.t
 G = Z;                  % the disturbance D(s) given by \ddot{y}
 
 %% Repeat the root locus method from P6.20:
@@ -33,14 +33,19 @@ subtitle('$m = 640kg, f_n = 2.5Hz, \zeta = 0.08$', 'interpreter', 'latex');
 
 % Plotting root locus of the underdamped second-order closed-loop system
 z1 = -k/b;
-z2 = real(roots([1 zeta*w_n]));     % Real part of the roots
-K_p = 1;                            % The proportional gain
-K = K_p*(s-z1)*(s-z2);              % The dynamic feedback controller
-sys = -K*G;
+K = (s - z1);
+sys = minreal(K*G);     % The loop transfer function L(s)
 subplot(2, 1, 2);
 rlocusplot(sys);
+sgrid(zeta, w_n);
 axis equal;
 xlim([-150 20]);
 title('Root locus of underdamped second-order closed-loop system in Problem 6.23', 'interpreter', 'latex');
-subtitle('$G(s) = \frac{-1}{s^2}, K(s) = k(s-\frac{k}{b})(z-\Re\{2\zeta w_n\})$', 'interpreter', 'latex');
-legend('$\frac{k}{b} = \frac{w_n}{2\zeta}, \frac{-1}{m} = \Re\{\zeta\omega_n\}$', 'interpreter', 'latex');
+subtitle('$G(s) = \frac{1}{ms^2}, K(s) = s+\frac{k}{b}$', 'interpreter', 'latex');
+legend('$\frac{k}{b} = \frac{w_n}{2\zeta}, \frac{1}{m} = \Re\{\zeta\omega_n\}$', 'interpreter', 'latex');
+% We can find values of \alpha that stabilize the system by inspecting the 
+% root locus. For \alpha = 2.49, b = \alpha*m = 2.49*640 = 1593.6 kg/s.
+% From z1 = k/b, k = z*b ~= 99*1593.6 = 157770 kg/s^2.
+% Comparing this to the values derived in P6.20, we find that our estimate
+% of k = 157770 is very similar to the value 16000*pi^2. Similarly, we find
+% that our estimate of b = 1593.6 is very similar to the value512*pi.
