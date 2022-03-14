@@ -63,13 +63,12 @@ elseif print_values
     text(real(z(3)) + 20.5, imag(z(3)) - 20.5, sprintf('%g%+gi', real(z(3)), imag(z(3))));
     text(real(p(3)) + 40.5, imag(p(3)) - 20.5, sprintf('%g%+gi', real(p(3)), imag(p(3))));
 end
-axis equal
+axis equal;
 a = findobj(gca, 'type', 'line')
 for i = 1:length(a)
     set(a(i), 'markersize', 8)
     set(a(i), 'linewidth', 2)
 end
-ylim([-200 200]);
 title('Poles and zeros of the continuous second-order system in Problem 6.25', 'interpreter', 'latex');
 subtitle('$\omega_{n} = 5\pi rad/s, b_s = 22,100 kg/s, k_s = 460,300 Nm, k_u = 200000 Nm, b_u = 0, m_u = 40kg, m_s = 600kg, f_n = 2.5 Hz, \zeta = 0.08$', 'interpreter', 'latex');
 
@@ -77,7 +76,9 @@ subtitle('$\omega_{n} = 5\pi rad/s, b_s = 22,100 kg/s, k_s = 460,300 Nm, k_u = 2
 subplot(2, 1, 2);
 rlocusplot(sys);
 axis equal;
-xlim([-700 50]);
+% Plotting the original zeta and w_n values
+sgrid(0.08, 5*pi);
+xlim([-600 800]);
 ylim([-80 80]);
 title('Root locus of underdamped second-order closed-loop system in Problem 6.25', 'interpreter', 'latex');
 subtitle('$\omega_{n} = 5\pi rad/s, b_s = 22,100 kg/s, k_s = 460,300 Nm, k_u = 200000 Nm, b_u = 0, m_u = 40kg, m_s = 600kg, f_n = 2.5 Hz, \zeta = 0.08$', 'interpreter', 'latex');
