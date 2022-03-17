@@ -10,12 +10,15 @@ p2 = -2;
 % The transfer function of the system
 s = tf('s');
 G = 1/((s-p1)*(s-p2));
+% Assuming unit gain at \omega = 0, i.e., |G(0)| = 1 and finding \beta
+% from the normalized transfer function in canonical form
+beta = 2;                           % where |\frac{\beta}{2}| = 1
 % Plotting the Nyquist plot of the system
 figure;
-nyquistplot(G);
+nyquistplot(beta*G);
 grid on;
-title('Nyquist (polar) plot of system in Fig. 7.32(a)', 'interpreter', 'latex');
-subtitle('$G(s) = \frac{1}{(s+1)(s+2)}$', 'interpreter', 'latex');
+title('Nyquist plot of system in Fig. 7.32(a)', 'interpreter', 'latex');
+subtitle('$G(s) = \beta\frac{1}{(s+1)(s+2)}, \beta = 2$', 'interpreter', 'latex');
 xlabel('$\textrm{Real axis} \quad (\Re)$', 'interpreter', 'latex');
 ylabel('$\textrm{Imaginary axis} \quad (\Im)$', 'interpreter', 'latex');
 
@@ -26,12 +29,15 @@ p2 = 2;
 % The transfer function of the system
 s = tf('s');
 G = 1/((s-p1)*(s-p2));
+% Assuming unit gain at \omega = 0, i.e., |G(0)| = 1 and finding \beta
+% from the normalized transfer function in canonical form
+beta = 2;                           % where |\frac{\beta}{2}| = 1
 % Plotting the Nyquist plot of the system
 figure;
-nyquistplot(G);
+nyquistplot(beta*G);
 grid on;
-title('Nyquist (polar) plot of system in Fig. 7.32(c)', 'interpreter', 'latex');
-subtitle('$G(s) = \frac{1}{(s-1)(s-2)}$', 'interpreter', 'latex');
+title('Nyquist plot of system in Fig. 7.32(c)', 'interpreter', 'latex');
+subtitle('$G(s) = \beta\frac{1}{(s-1)(s-2)}, \beta = 2$', 'interpreter', 'latex');
 xlabel('$\textrm{Real axis} \quad (\Re)$', 'interpreter', 'latex');
 ylabel('$\textrm{Imaginary axis} \quad (\Im)$', 'interpreter', 'latex');
 
@@ -45,11 +51,16 @@ z1 = 0;
 % The transfer function of the system
 s = tf('s');
 G = (s-z1)/((s-p1)*(s-p2)*(s-p3));
+% Since there exists a zero at the origin, assume unit gain at \omega = 1,
+% for the poles/zeros at the origin and unit gain at \omega = 0 for the
+% poles/zeros not at zero. Finding \beta from the normalized transfer 
+% function in canonical form
+beta = 2;                           % where |\frac{\beta\times1j}{2}| = 1
 % Plotting the Nyquist plot of the system
 figure;
-nyquistplot(G);
+nyquistplot(beta*G);
 grid on;
-title('Nyquist (polar) plot of system in Fig. 7.32(h)', 'interpreter', 'latex');
-subtitle('$G(s) = \frac{s}{(s+1)(s^2+1)}$', 'interpreter', 'latex');
+title('Nyquist plot of system in Fig. 7.32(h)', 'interpreter', 'latex');
+subtitle('$G(s) = \beta\frac{s}{(s+1)(s^2+1)}, \beta = 2$', 'interpreter', 'latex');
 xlabel('$\textrm{Real axis} \quad (\Re)$', 'interpreter', 'latex');
 ylabel('$\textrm{Imaginary axis} \quad (\Im)$', 'interpreter', 'latex');

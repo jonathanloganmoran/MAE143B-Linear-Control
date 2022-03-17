@@ -6,8 +6,8 @@
 % where x_1 is the population of the prey and x_2 the predator.
 %
 % Inputs:
-%    t -     Time variable. Not used – equations are independent of time.
-%    x -     Independent variable: the populations x_2 and y_2.
+%    t -     Time variable. Not used – independent variable.
+%    x -     Dependent variable: the populations x_2 and y_2.
 % Output:
 %   dx -     Rate of range of the populations.
 %
