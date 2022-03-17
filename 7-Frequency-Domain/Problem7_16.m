@@ -23,6 +23,12 @@ w = g*r*(m1 - m2);                  % kgm^2/s
 s = tf('s');
 p1 = -b/a;
 G = (r/a) / (s*(s - p1));
+% Given that there exists a non-zero input disturbance W(s), the
+% proportional gain controller K(s) = K_p from P7.15 no longer performs
+% asymptotic tracking. Thus, we want to design a controller K(s) that
+% achieves asymptotic disturbance rejection for a constant input
+% disturbance W(s) = \bar{w}. We will proceed with a PI controller below.
+
 % Plotting the root locus of the open-loop system with disturbance
 figure;
 subplot(2, 1, 1);
@@ -30,16 +36,13 @@ rlocusplot(G*(1/s));
 axis equal;
 title('Root locus of open-loop system with disturbance in Problem 7.16', 'interpreter', 'latex');
 subtitle('$r = 1m, m_1 = 1000kg, m_2 = 800kg, b_1 = b_2 = 120 kgm^2/s, J_1 = J_2 = 20 kgm^2, g = 10 m/s^2$', 'interpreter', 'latex');
-% Since the transfer function G(s) has a pole at the origin, it is not
-% asymptotically stable.
-% We also have a non-zero input disturbance W(s). To perform asymptotic
-% tracking and asymptotic disturbance rejection, we need to introduce a PI
-% controller K(s) = K(s+z1)/s.
+% To perform asymptotic tracking and asymptotic disturbance rejection, we
+% introduce a PI controller K(s) = K(s+z1)/s.
 % For the closed-loop system to be A.S., we need the centroid of the
 % root-locus of the system to be on the LHP. Thus, a zero at the location
 % 0 < |z1| < b/a satisfies the condition for |z1| = 0.5*(b/a).
 z1 = -0.5*(b/a);                    % The zero of the controller K(s)
-Kp = 10;                            % The proportional gain
+Kp = 1;                             % The proportional gain \alpha = K_p
 K = Kp*(s-z1) / s;                  % The PI controller K(s)
 % Forming the closed-loop system with PI controller K(s)
 sys = G*K;
@@ -48,9 +51,9 @@ subplot(2, 1, 2);
 rlocusplot(sys);
 axis equal;
 title('Root locus of closed-loop system in Problem 7.16', 'interpreter', 'latex');
-subtitle('$K(s) = Kp\frac{s+0.5\frac{b}{a}}{s}, Kp = 10, r = 1m, m_1 = 1000kg, m_2 = 800kg, b_1 = b_2 = 120 kgm^2/s, J_1 = J_2 = 20 kgm^2, g = 10 m/s^2$', 'interpreter', 'latex');
+subtitle('$K(s) = Kp\frac{s+0.5\frac{b}{a}}{s}, Kp = 1, r = 1m, m_1 = 1000kg, m_2 = 800kg, b_1 = b_2 = 120 kgm^2/s, J_1 = J_2 = 20 kgm^2, g = 10 m/s^2$', 'interpreter', 'latex');
 % From the root locus diagram we see that there exist zero poles in the
-% RHP. The asymptotes appear in the LHP when K > 0 and the zero of the
+% RHP. The asymptotes appear in the LHP when \alpha > 0 and the zero of the
 % controller |z1| < b/a. Therefore, the system is asymptotically stable and
 % performs asymptotic disturbance rejection.
 
@@ -74,7 +77,7 @@ subplot(2, 1, 2);
 bodeplot(sys);
 grid on;
 title('Magnitude and phase plot of closed-loop system in P7.16', 'interpreter', 'latex');
-subtitle('$K(s) = Kp\frac{s+\frac{b}{a}}{s}, G(s) = \frac{\frac{r}{a}}{s(s+\frac{b}{a})}, Kp = 10$', 'interpreter', 'latex');
+subtitle('$K(s) = Kp\frac{s+\frac{b}{a}}{s}, G(s) = \frac{\frac{r}{a}}{s(s+\frac{b}{a})}, Kp = 1$', 'interpreter', 'latex');
 xlabel('$\textrm{Frequency}$', 'interpreter', 'latex');
 ylabel('', 'interpreter', 'latex');
 
@@ -97,7 +100,7 @@ nyquistplot(sys);
 grid on;
 axis equal;
 title('Nyquist plot of the closed-loop system in P7.16', 'interpreter', 'latex');
-subtitle('$K(s) = Kp\frac{s+\frac{b}{a}}{s}, G(s) = \frac{\frac{r}{a}}{s(s+\frac{b}{a})}, Kp = 10$', 'interpreter', 'latex');
+subtitle('$K(s) = Kp\frac{s+\frac{b}{a}}{s}, G(s) = \frac{\frac{r}{a}}{s(s+\frac{b}{a})}, Kp = 1$', 'interpreter', 'latex');
 xlabel('$\textrm{Real axis} \quad (\Re)$', 'interpreter', 'latex');
 ylabel('$\textrm{Imaginary axis} \quad (\Im)$', 'interpreter', 'latex');
 % From the Nyquist plot of the closed-loop system with stabilizing PI
@@ -119,5 +122,5 @@ p = pole(G)
 gm = allmargin(G).GainMargin
 pm = allmargin(G).PhaseMargin
 % Since the gain margin is inifinity, the closed-loop system is
-% asymptotically stable for all values of K > 0. 
+% asymptotically stable for all values of \alpha > 0. 
 % When K = 10, the phase margin is 88.17 degrees.

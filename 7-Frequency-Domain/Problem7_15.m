@@ -23,8 +23,11 @@ w = g*r*(m1 - m2);                  % kgm^2/s
 s = tf('s');
 p1 = -b/a;
 G = (r/a) / (s*(s - p1));
-% Since the transfer function G(s) has a pole at the origin, it is not
-% asymptotically stable.
+% Since the input disturbance W(s) = 0, and given a transfer function G(s) 
+% with a pole at the origin, we can achieve asymptotic tracking with a 
+% proportional gain controller K(s) = K_p such that the closed-loop system
+% is stable.
+% Given the above, we define the system to be L(s) = G(s), \alpha = K_p.
 
 %% P7.15: Use Bode plots and the Nyquist stability criterion to design a
 % dynamic feedback controller that uses \tau as control input and the
@@ -32,7 +35,8 @@ G = (r/a) / (s*(s - p1));
 % v_1(\tau)d\tau as measured output so that the closed loop is capable of
 % asymptotically tracking a constant position reference \bar{x_1}(t) =
 % \bar{x_1}, t \geq 0.
-% Plotting the magnitude and phase of the open-loop system
+% Plotting the magnitude and phase of the open-loop system L(s) = G(s) with
+% proportional gain \alpha = K_p
 figure;
 bodeplot(G);
 grid on;
@@ -40,7 +44,8 @@ title('Magnitude and phase plot of open-loop system in P7.15', 'interpreter', 'l
 subtitle('$G(s) = \frac{\frac{r}{a}}{s(s+\frac{b}{a})}$', 'interpreter', 'latex');
 xlabel('$\textrm{Frequency}$', 'interpreter', 'latex');
 ylabel('', 'interpreter', 'latex');
-% Plotting the Nyquist plot of the open-loop system
+% Plotting the Nyquist plot of the open-loop system L(s) = G(s) with
+% proportional gain \alpha = K_p
 figure;
 nyquistplot(G);
 grid on;
@@ -49,7 +54,8 @@ subtitle('$G(s) = \frac{\frac{r}{a}}{s(s+\frac{b}{a})}$', 'interpreter', 'latex'
 xlabel('$\textrm{Real axis} \quad (\Re)$', 'interpreter', 'latex');
 ylabel('$\textrm{Imaginary axis} \quad (\Im)$', 'interpreter', 'latex');
 % From the Nyquist plot we see that there are zero encirclements around the
-% point -1 + j0. The system is stable under negative unit feedback.
+% point -1 + j0. The system is stable under negative unit feedback, i.e.,
+% for a value \alpha = K_p = 1.
 % Consider the Nyquist stability criterion where p is the number of poles
 % of G(s) on the RHP and z is the number of zeros of G(s) on the RHP.
 % Since p is zero, we look at z (the poles of the system G(s) under
