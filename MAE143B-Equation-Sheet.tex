@@ -111,11 +111,11 @@
 
     \small{
     	\begin{tabular}{lp{5cm} l} \hline
-    	\textit{Steady state error} &   $e_{SS} = \Bar{v_1} - v_{SS} = \Bar{v_1} - \Tilde{v_1}$. \\ \hline
-		\textit{Open loop} &    $\lambda_{OL} = -\frac{b}{a}$, \\ & 
+    	\textit{Steady-state error} &   $e_{SS} = \Bar{v_1} - v_{SS} = \Bar{v_1} - \Tilde{v_1}$. \\ \hline
+		\textit{Open-loop} &    $\lambda_{OL} = -\frac{b}{a}$, \\ & 
                                 $\Bar{v_1} = \frac{r}{b}[\tau + gr(m_1 - m_2)]$, \\ &
                                 $TC_{OL} = -\frac{1}{\lambda_{OL}}$. \\ \hline
-        \textit{Closed loop} &  $\tau(t) = K(\Bar{v_1} - v_1(t))$ \textit{controller} \\ &
+        \textit{Closed-loop} &  $\tau(t) = K(\Bar{v_1} - v_1(t))$ \textit{controller} \\ &
                                 $\lambda_{CL} = -\frac{(b + Kr)}{a}$, \\ & 
                                 $\Tilde{v_1} = \frac{r}{b + Kr}[K\Bar{v_1} + gr(m_1 - m_2)]$, \\ &
                                 $TC_{OL} = -\frac{1}{\lambda_{OL}}$, \\ &
@@ -182,14 +182,14 @@
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
     \small {
-    	\begin{tabular}{lp{4cm}}
+    	\begin{tabular}{lp{3cm}}
     	\texit{Lemma 4.1} \qquad Asymptotic tracking \\ \hline
 		Let $S(s)$ be the asymptotically stable transfer function \\ $S(0) = 0$. The system asymptotic tracks a constant refer-\\ence input if the product $GK$ has a pole at the origin. \\ \hline
     	\textit{Lemma 4.3} \qquad Internal stability \\ \hline
 		The closed-loop system is internally stable if and only if \\ $S(s)$ is asymptotically stable and any pole-zero cancellat-\\ions of the product $GK$ satisfy $\Re\{z\} < 0$. \\ \hline
 	\end{tabular}}
 	\small{
-	\begin{tabular}{lp{4cm}}
+	\begin{tabular}{lp{4.5cm}}
 	    \textit{Asymptotic stability} &
 		If $G(s)$ converges and is bounded for all $\Re(s) \geq 0$, i.e., $G(s)$ does not have poles on the imaginary axis or on the right-hand side of the complex plane. \\ \hline
 	    \textit{Asymptotic tracking} &
@@ -197,9 +197,7 @@
 		\textit{Asymptotic} &
 		If $D(s)$ has a zero at $s = 0$, &
 		\textit{disturbance rejection} &
-		or the controller $K(s)$ has a pole at the origin.\\ \hline
-		\textit{Asymptotic tracking} &
-		If $S(s)$ has a zero at $s = 0$.
+		or the controller $K(s)$ has a pole at the origin.
 	\end{tabular}}
     \end{minipage}
 };
@@ -212,7 +210,7 @@
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
     \small{
-    	\begin{tabular}{lp{4cm} l}
+    	\begin{tabular}{lp{3.5cm} l}
 		\textit{Sensitivity} & i.e., from $\bar{v_1} \textrm{   to} \textrm{   } e $ \\
 		& $S = \frac{1}{1 + GK}$
 		\\ \hline
@@ -243,7 +241,7 @@
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
     \small{
-    	\begin{tabular}{lp{5cm} l} 
+    	\begin{tabular}{lp{6cm} l} 
     	\textit{Sensitivity} &
         The poles of $S(s)$ are the zeros of the characteristic equation of $S(s)$. \\ &
         Furthermore, the zeros of $S(s)$ are the poles of the product $GK$.
@@ -338,7 +336,7 @@
     	Equal to the order of the characteristic equation, i.e., the denominator of the loop gain transfer function $L(s)$.
     	\\ \hline
     	\textit{Asymptotes} &
-    	$N = n - m$, asymptotes/closed-loop poles for $n$ poles and $m$ zeros in the loop-gain transfer function. The asymptotes intersect the real axis at the point $c = \frac{\sum_{k=1}^{n}p_k - \sum_{i=1}^{m} z_i}{n-m}$ with angle $\angle \phi_{k} = \frac{\pi + 2\pi k}{n - m}$ for $k = 0,...,n-m-1.$ &
+    	$N = n - m$, asymptotes/closed-loop poles for $n$ poles and $m$ zeros in the loop-gain transfer function. The asymptotes intersect the real axis at the point $c = \frac{\sum_{k=1}^{n}p_k - \sum_{i=1}^{m} z_i}{n-m}$ with angle $\angle \phi_{k} = \frac{\pi + 2\pi k}{n - m}$ for $k = 0,...,n-m-1$ if $m > n+1$. &
     	\\ \hline
     	\textit{Root-locus on} $\Re$ &
     	A point $s$ on the real axis will only be on the root-locus if it is to the left of an odd number of poles and zeros.
@@ -350,7 +348,7 @@
 		Root-locus leaves a complex pole $p_j$ at $\theta_{d} = 180^{\circ} + \sum \angle (p_j - z_i) - {\sum \angle {p_j - p_i}}$.
 		\\ \hline
 		\textit{Angle of arrival} &    
-		Root-locus arrives a complex zero $z_j$ at $\theta_{a} = 180^{\circ} - \sum \angle (z_j - z_i) - {\sum \angle {z_j - p_i}}$.
+		Root-locus arrives at a complex zero $z_j$ at $\theta_{a} = 180^{\circ} - \sum \angle (z_j - z_i) + {\sum \angle {z_j - p_i}}$.
 	\end{tabular}}
     \end{minipage}
 };
@@ -365,23 +363,23 @@
     $\textrm{Magnitude}$ \quad \qquad $20\log_{10}\left \vert G(j\omega) \right \vert,$ in units of $dB$.
     \small{
     	\begin{tabular}{lp{5.7cm} l} \hline
-    	\textit{Gain offset}  &  $ 20\log_{10}\left \vert G(0) \right \vert$ for constant gain, $-20 dB$ for pole at origin, $+20 dB$ for zero at origin. \\ \hline
-    	\textit{Gain margin} &  $GM = 0 - A_{m} dB$, The corresponding point on the magnitude curve at the phase crossover frequency, i.e., the vertical axis intersection point where $\angle G(j\omega) = \vert -180^{\circ} \vert$. \\ \hline
-    	\textit{Poles} &  $(1 + \frac{s}{\tau})^{k} \rightarrow -20\times k \frac{dB}{dec}$ at $\omega = \tau$ if stable, else $+20\times k \frac{dB}{dec}$. If second-order, $(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2) \rightarrow -40 \frac{dB}{dec}$ at $\omega = \omega_n$. \\ \hline
-    	\textit{Zeros} & $(1 + \frac{s}{\tau})^{k} \rightarrow +20\times k \frac{dB}{dec}$ at $\omega = \tau$ if stable, else $-20\times k \frac{dB}{dec}$. If second-order, i.e., $(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2) \rightarrow +40 \frac{dB}{dec}$ at $\omega = \omega_n$. \\ \hline
+    	\textit{Gain offset}  &  $ 20\log_{10}\left \vert G(j\omega = 0) \right \vert$ for constant gain. \\ \hline
+    	\textit{Gain margin} &  $GM = 0 - A_{m} dB$, The corresponding point on the magnitude curve at the phase crossover frequency, i.e., the vertical axis intersection point where $\angle G(j\omega) = \pm 180^{\circ}$. \\ \hline
+    	\textit{Poles} &  $(1 + \frac{s}{\tau})^{k} \rightarrow -20\frac{dB}{dec}\times k $ at $\omega = \tau$ if stable, else $+20\frac{dB}{dec}\times k $. If at origin, $-20 \frac{dB}{dec}$ that passes through $0 dB$ at $\omega = 1$.  If second-order, i.e., $(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2) \rightarrow -40 \frac{dB}{dec}$ at $\omega = \omega_n$, peak with amplitude $\vert H(j\omega_{0})\vert = -20log(2\zeta)$ at $\omega_0$ if $\zeta < 0.5$. \\ \hline
+    	\textit{Zeros} & $(1 + \frac{s}{\tau})^{k} \rightarrow +20 \frac{dB}{dec}\times k$ at $\omega = \tau$ if stable, else $-20\frac{dB}{dec}\times k $. If at origin, $+20 \frac{dB}{dec}$ that passes through $0 dB$ at $\omega = 1$. If second-order, i.e., $(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2) \rightarrow +40 \frac{dB}{dec}$ at $\omega = \omega_n$, peak with amplitude $\vert H(j\omega_{0})\vert = +20log(2\zeta)$ at $\omega_0$ if $\zeta < 0.5$. \\ \hline
     	\textit{Slope} & Ends with $-20\times (n - m) \frac{dB}{dec}$. \\ \hline
-    	\textit{Unit gain} & $\beta$, such that $\beta \vert G(0) \vert = 1$, i.e., substitute $s = j\omega = 0$ for poles/zeros of $G(s)$ not at the origin, and $\beta\vert G(j1) = 1$, i.e., $s = j1$ for poles/zeros at the origin, then solve for the value of $\beta$ that makes the expression of magnitude $\vert G(j\omega) \vert$ true. \\ \hline
+    	\textit{Unit gain} & $\beta$, such that $\beta \vert G(0) \vert = 1$, i.e., substitute $s = j\omega = 0$ for poles/zeros of $G(s)$ not at the origin, and $\beta\vert G(j1) \vert = 1$, i.e., $s = j1$ for poles/zeros at the origin, then solve for the value of $\beta$ that makes the expression of magnitude $\vert G(j\omega) \vert$ true. \\ \hline
     \end{tabular}}
     \newline
     \newline
     $\textrm{Phase}$ \quad \qquad \qquad $\angle G(j\omega),$ in units of $degrees$.
     \small{
     	\begin{tabular}{lp{5.7cm} l} \hline
-    	\textit{Gain offset} &  $+180^{\circ}$ if negative, $+90^{\circ}$ for each pole, $-90^{\circ}$ zero at origin. \\ \hline
+    	\textit{Gain offset} &  $+180^{\circ}$ if $\vert G(j\omega = 0)\vert$ is negative, $-90^{\circ}$ for each pole, $+90^{\circ}$ zero at origin. \\ \hline
     	\textit{Phase margin} &  $PM = \phi_{m} - (-180^{\circ})$, the corresponding point on the phase curve at the gain crossover frequency, i.e., the vertical axis intersection point where $\vert G(j\omega) \vert = 0 dB$. \\ \hline
-    	\textit{Poles} &        $(1 + \frac{s}{\tau})^{k} \rightarrow -45^{\circ}\times k$ at $\omega = 0.1\tau$ if stable, else $+45^{\circ}\times k$. If second-order, i.e., $\left(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2\right) \rightarrow -\tan^{-1}\left(\frac{\frac{2\zeta\omega}{\omega_{n}}}{1-\left(\frac{\omega}{\omega_{n}}\right)^2}\right) \frac{dB}{dec}$ at $\omega = 0.1\omega_n$. 
+    	\textit{Poles} &        $(1 + \frac{s}{\tau})^{k} \rightarrow -45^{\circ}/dec \times k$ at $\omega = 0.1\tau$ if stable, else $+45^{\circ}/dec \times k$. If second-order, i.e., $\left(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2\right) \rightarrow -\tan^{-1}\left(\frac{\frac{2\zeta\omega}{\omega_{n}}}{1-\left(\frac{\omega}{\omega_{n}}\right)^2}\right)/dec$ at $\omega = 0.1\omega_n$. 
     	\\ \hline
-    	\textit{Zeros} &        $(1 + \frac{s}{\tau})^{k} = +45^{\circ}\times k$ at $\omega = 0.1\tau$ if stable, else $-45^{\circ}\times k$. If second-order, i.e., $\left(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2\right) \rightarrow +\tan^{-1}\left(\frac{\frac{2\zeta\omega}{\omega_{n}}}{1-\left(\frac{\omega}{\omega_{n}}\right)^2}\right) \frac{dB}{dec}$ at $\omega = 0.1\omega_n$. \\ \hline
+    	\textit{Zeros} &        $(1 + \frac{s}{\tau})^{k} = +45^{\circ}/dec \times k$ at $\omega = 0.1\tau$ if stable, else $-45^{\circ}/dec \times k$. If second-order, i.e., $\left(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2\right) \rightarrow +\tan^{-1}\left(\frac{\frac{2\zeta\omega}{\omega_{n}}}{1-\left(\frac{\omega}{\omega_{n}}\right)^2}\right)/dec$ at $\omega = 0.1\omega_n$. \\ \hline
     	\textit{Slope} &        ends flat at $\angle 90^{\circ}\times(m_{-} + m_{0} + n_{+}) - 90^{\circ}\times(m_{+} + n_{-} + n_{0})$, \\ \hline
     \end{tabular}}
     where $m_{+}/n_{+}$ are number of unstable poles/zeros, $m_{-}/ n_{-}$ stable poles/zeros, $m_{0}/n_{0}$ poles/zeros on imaginary axis.
@@ -404,7 +402,7 @@
     	\textit{Theorem 7.2}  &  Assume that a transfer function $L(s)$ has no poles on the imaginary axis. For any given $\alpha > 0$ the loop transfer function in negative feedback with static gain controller $\alpha$ is asymptotically stable if and only if the number of counter-clockwise encirclements of the image contour $\Gamma$ around the point $-1/\alpha$ is equal to the number of poles of $L(s)$ on the right-hand side of the complex plane.\\ \hline
     	\textit{Closed-loop}   & The closed-loop system $L(s)$ is \\ \textit{stability} & asymptotically stable if and only if $Z_{\Gamma} = P_{\Gamma} - \frac{1}{2\pi}\Delta_{\Gamma}^{-\frac{1}{\alpha}} \textrm{arg}L(s) = 0$. \\ \hline
     \end{tabular}}
-    where $Z_{\Gamma}$ is the number of closed-loop poles and $P_{\Gamma}$ the number of open-loop poles of $L(s)$ inside the contour $\Gamma$, i.e., on the RHP.
+    where $Z_{\Gamma}$ is the number of closed-loop poles and $P_{\Gamma}$ the number of open-loop poles of $L(s)$ inside the contour $\Gamma$, i.e., on the RHP (excluding the imaginary axis).
     \end{minipage}
 };
 %------------ Nyquist Header ---------------------
