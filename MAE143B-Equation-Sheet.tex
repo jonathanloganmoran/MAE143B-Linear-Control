@@ -130,6 +130,32 @@
 \node[fancytitle, right=10pt] at (box.north west) {P2.10 Elevator Problem};
 \end{tikzpicture}
 
+
+%------------ Laplace Transforms Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    $L[f](s) = \int_0^{\infty} e^{-sx}f(x)dx $\\
+    
+    \small{
+    	\begin{tabular}{lp{4cm} l}
+        $f(t) = t^n, n \geq 0 $ &$F(s) = \frac{n!}{s^{n+1}}, s > 0 $ \\
+        $f(t) = e^{at}, a \textit{ constant}$ & $ F(s) = \frac{1}{s-a}, s > a$ \\
+        $f(t) = \sin{bt}, b \textit{ constant}$ & $ F(s) = \frac{b}{s^2 + b^2}, s > 0$ \\
+        $f(t) = \cos{bt}, b \textit{ constant}$ & $ F(s) = \frac{s}{s^2 + b^2}, s > 0$ \\
+        $f(t) = t^{-1/2}$ & $F(s) = \frac{\pi}{s^{1/2}}, s > 0$ \\
+        $f(t) = \delta(t-a)$ & $F(s) = e^{-as}$ \\
+        $f'$ & $L[f'] = sL[f] - f(0)$ \\
+        $f''$ & $L[f''] = s^2 L[f] - sf(0) - f'(0)$ \\
+        $L[e^{at}f(t)]$ & $L[f](s-a)$ \\
+        $L[u_a(t)f(t-a)]$ & $L[f]e^{-as}$ 
+        \end{tabular}}
+    \end{minipage}
+};
+%------------ Laplace Transforms Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {3.1 Laplace Transform};
+\end{tikzpicture}
+
 %------------ Frequency-Response Method ---------------
 \begin{tikzpicture}
 \node [mybox] (box){%
@@ -165,16 +191,16 @@
 	\small{
 	\begin{tabular}{lp{4cm}}
 	    \textit{Asymptotic stability} &
-		if $G(s)$ converges and is bounded for all $\Re(s) \geq 0$, i.e., $G(s)$ does not have poles on the imaginary axis or on the right-hand side of the complex plane. \\ \hline
+		If $G(s)$ converges and is bounded for all $\Re(s) \geq 0$, i.e., $G(s)$ does not have poles on the imaginary axis or on the right-hand side of the complex plane. \\ \hline
 	    \textit{Asymptotic tracking} &
-		if $S(s)$ has a zero at $s = 0$. \\ \hline
+		If $S(s)$ has a zero at $s = 0$ and the product $GK$ has a pole at the origin. \\ \hline
 		\textit{Asymptotic} &
-		if $D(s)$ has a zero at $s = 0$, &
+		If $D(s)$ has a zero at $s = 0$, &
 		\textit{disturbance rejection} &
-		or the controller $K(s)$ has a pole at the origin, i.e., $s = j\omega$. \\ \hline
+		or the controller $K(s)$ has a pole at the origin.\\ \hline
 		\textit{Asymptotic tracking} &
-		if $S(s)$ has a zero at $s = 0$.
-	\end{tabular}
+		If $S(s)$ has a zero at $s = 0$.
+	\end{tabular}}
     \end{minipage}
 };
 %------------ Tracking and Control ---------------------
@@ -193,10 +219,10 @@
 		\textit{Disturbance} & i.e., from $w  \textrm{   to} \textrm{   } e$ \\
 		& $ D = GS = \frac{G}{1 + GK}$
 		\\ \hline
-		\textit{Output-input} & i.e., from $\bar{v_1} \textrm{   to} \textrm{   } v_1$ \\
+		\textit{Complementary sensitivity} & i.e., from $\bar{v_1} \textrm{   to} \textrm{   } v_1$ \\
 		& $ H = GKS = \frac{GK}{1 + GK}. $
 		\\ \hline
-		\textit{Design} & $ Q = GS = \frac{K}{1 + GK}. $
+		\textit{Design} & $ Q = KS = \frac{K}{1 + GK}. $
 		\\ \hline
 		\\
 		\textit{Closed-loop system} & \textit{For inputs} \\ \hline
@@ -210,31 +236,6 @@
 };
 %------------ Feedback with Disturbances Header ---------------------
 \node[fancytitle, right=10pt] at (box.north west) {4.4 Feedback with Disturbances};
-\end{tikzpicture}
-
-%------------ Laplace Transforms Content ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    $L[f](s) = \int_0^{\infty} e^{-sx}f(x)dx $\\
-    
-    \small{
-    	\begin{tabular}{lp{4cm} l}
-        $f(t) = t^n, n \geq 0 $ &$F(s) = \frac{n!}{s^{n+1}}, s > 0 $ \\
-        $f(t) = e^{at}, a \textit{ constant}$ & $ F(s) = \frac{1}{s-a}, s > a$ \\
-        $f(t) = \sin{bt}, b \textit{ constant}$ & $ F(s) = \frac{b}{s^2 + b^2}, s > 0$ \\
-        $f(t) = \cos{bt}, b \textit{ constant}$ & $ F(s) = \frac{s}{s^2 + b^2}, s > 0$ \\
-        $f(t) = t^{-1/2}$ & $F(s) = \frac{\pi}{s^{1/2}}, s > 0$ \\
-        $f(t) = \delta(t-a)$ & $F(s) = e^{-as}$ \\
-        $f'$ & $L[f'] = sL[f] - f(0)$ \\
-        $f''$ & $L[f''] = s^2 L[f] - sf(0) - f'(0)$ \\
-        $L[e^{at}f(t)]$ & $L[f](s-a)$ \\
-        $L[u_a(t)f(t-a)]$ & $L[f]e^{-as}$ 
-        \end{tabular}}
-    \end{minipage}
-};
-%------------ Laplace Transforms Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Laplace Transforms};
 \end{tikzpicture}
 
 %------------ Pole-Zeros Content ---------------
@@ -262,6 +263,32 @@
 \node[fancytitle, right=10pt] at (box.north west) {4.7 Pole-Zero Cancellations and Stability};
 \end{tikzpicture}
 
+%------------ State-Space Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \small{
+    	\begin{tabular}{lp{5cm} l} 
+    	\textit{State-space form} &
+        $\dot{x} = Ax + Bu, y = Cx + Du.$
+    	\\ \hline
+		\textit{A} &
+		The state matrix of size $n\times n,$ where $n$ is the number of state variables. \\ \hline
+		\textit{B} &
+		The input matrix of size $n\times m$, where $m$ is the number of outputs. \\ \hline
+		\textit{C} &
+		The output matrix of size $m\times n$. \\ \hline
+		\textit{D} &
+		The transition matrix of size $m\times m$. \\ \hline
+		\textit{Equilibrium points} &
+		Set partial derivatives of system equations to zero, i.e., $\frac{\partial y}{\partial x_1} = 0$.
+	\end{tabular}}
+    \end{minipage}
+};
+%------------ State-Space Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {5.2 State-Space Models};
+\end{tikzpicture}
+
 %------------ Second-Order Systems Content ---------------
 \begin{tikzpicture}
 \node [mybox] (box){%
@@ -270,6 +297,12 @@
     	\begin{tabular}{lp{5cm} l} 
     	\textit{Characteristic} &
     	$s^2 + 2\zeta \omega_{n}s + \omega_{n}^2$, \quad $\omega_{n} > 0$. \\ \textit{equation} &
+    	\\ \hline
+    	\textit{Canonical} &
+    	$(1 - \omega^{2}/\omega_{n}^{2} + j2\zeta\omega/\omega_{n})^{k}, \quad \vert \zeta \vert < 1$. \\ \textit{form} &
+    	\\ \hline
+    	\textit{Poles} &
+    	$p = -\omega_{n}(\zeta \pm \sqrt{\zeta^2 - 1}), \Re\{p\} = -\omega_{n}, \quad \vert p \vert = \omega_{n} \left \vert -\zeta \pm j\sqrt{1-\zeta^2} \right\vert$ &
     	\\ \hline
 		\textit{Inverse Laplace} &    
 		$\mathscr{L}^{-1} = \left \{ \frac{k}{s + \zeta \omega_n - j\omega_d} + \frac{k^{*}}{s + \zeta \omega_n + j\omega_d} \right \} $ \\ \textit{Transform} &
@@ -290,6 +323,108 @@
 };
 %------------ Second-Order Systems Header ---------------------
 \node[fancytitle, right=10pt] at (box.north west) {6.1 Second-Order Systems};
+\end{tikzpicture}
+
+%------------ Root-Locus Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \small{
+    	\begin{tabular}{lp{4.5cm} l}
+    	\textit{Characteristic} &
+    	$1 + \alpha L(s)$, \quad $\alpha \geq 0$, \\ \textit{equation} & $L(s) = G(s)K(s)F(s).$
+    	\\ \hline
+    	\textit{Branches} &
+    	Equal to the order of the characteristic equation, i.e., the denominator of the loop gain transfer function $L(s)$.
+    	\\ \hline
+    	\textit{Asymptotes} &
+    	$N = n - m$, asymptotes/closed-loop poles for $n$ poles and $m$ zeros in the loop-gain transfer function. The asymptotes intersect the real axis at the point $c = \frac{\sum_{k=1}^{n}p_k - \sum_{i=1}^{m} z_i}{n-m}$ with angle $\angle \phi_{k} = \frac{\pi + 2\pi k}{n - m}$ for $k = 0,...,n-m-1.$ &
+    	\\ \hline
+    	\textit{Root-locus on} $\Re$ &
+    	A point $s$ on the real axis will only be on the root-locus if it is to the left of an odd number of poles and zeros.
+    	\\ \hline
+		\textit{Break-away} &    
+		$\textrm{CE} + k = 0, \quad k = -\textrm{CE}.$ \\ \textit{points} & $s$ is a break-away point if $\frac{dk}{ds} = 0$ is real and positive. 
+		\\ \hline
+		\textit{Angle of departure} &    
+		Root-locus leaves a complex pole $p_j$ at $\theta_{d} = 180^{\circ} + \sum \angle (p_j - z_i) - {\sum \angle {p_j - p_i}}$.
+		\\ \hline
+		\textit{Angle of arrival} &    
+		Root-locus arrives a complex zero $z_j$ at $\theta_{a} = 180^{\circ} - \sum \angle (z_j - z_i) - {\sum \angle {z_j - p_i}}$.
+	\end{tabular}}
+    \end{minipage}
+};
+%------------ Root-Locus Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {6.4 Root-Locus};
+\end{tikzpicture}
+
+%------------ Bode Plot Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    $\textrm{Magnitude}$ \quad \qquad $20\log_{10}\left \vert G(j\omega) \right \vert,$ in units of $dB$.
+    \small{
+    	\begin{tabular}{lp{5.7cm} l} \hline
+    	\textit{Gain offset}  &  $ 20\log_{10}\left \vert G(0) \right \vert$ for constant gain, $-20 dB$ for pole at origin, $+20 dB$ for zero at origin. \\ \hline
+    	\textit{Gain margin} &  $GM = 0 - A_{m} dB$, The corresponding point on the magnitude curve at the phase crossover frequency, i.e., the vertical axis intersection point where $\angle G(j\omega) = \vert -180^{\circ} \vert$. \\ \hline
+    	\textit{Poles} &  $(1 + \frac{s}{\tau})^{k} \rightarrow -20\times k \frac{dB}{dec}$ at $\omega = \tau$ if stable, else $+20\times k \frac{dB}{dec}$. If second-order, $(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2) \rightarrow -40 \frac{dB}{dec}$ at $\omega = \omega_n$. \\ \hline
+    	\textit{Zeros} & $(1 + \frac{s}{\tau})^{k} \rightarrow +20\times k \frac{dB}{dec}$ at $\omega = \tau$ if stable, else $-20\times k \frac{dB}{dec}$. If second-order, i.e., $(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2) \rightarrow +40 \frac{dB}{dec}$ at $\omega = \omega_n$. \\ \hline
+    	\textit{Slope} & Ends with $-20\times (n - m) \frac{dB}{dec}$. \\ \hline
+    	\textit{Unit gain} & $\beta$, such that $\beta \vert G(0) \vert = 1$, i.e., substitute $s = j\omega = 0$ for poles/zeros of $G(s)$ not at the origin, and $\beta\vert G(j1) = 1$, i.e., $s = j1$ for poles/zeros at the origin, then solve for the value of $\beta$ that makes the expression of magnitude $\vert G(j\omega) \vert$ true. \\ \hline
+    \end{tabular}}
+    \newline
+    \newline
+    $\textrm{Phase}$ \quad \qquad \qquad $\angle G(j\omega),$ in units of $degrees$.
+    \small{
+    	\begin{tabular}{lp{5.7cm} l} \hline
+    	\textit{Gain offset} &  $+180^{\circ}$ if negative, $+90^{\circ}$ for each pole, $-90^{\circ}$ zero at origin. \\ \hline
+    	\textit{Phase margin} &  $PM = \phi_{m} - (-180^{\circ})$, the corresponding point on the phase curve at the gain crossover frequency, i.e., the vertical axis intersection point where $\vert G(j\omega) \vert = 0 dB$. \\ \hline
+    	\textit{Poles} &        $(1 + \frac{s}{\tau})^{k} \rightarrow -45^{\circ}\times k$ at $\omega = 0.1\tau$ if stable, else $+45^{\circ}\times k$. If second-order, i.e., $\left(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2\right) \rightarrow -\tan^{-1}\left(\frac{\frac{2\zeta\omega}{\omega_{n}}}{1-\left(\frac{\omega}{\omega_{n}}\right)^2}\right) \frac{dB}{dec}$ at $\omega = 0.1\omega_n$. 
+    	\\ \hline
+    	\textit{Zeros} &        $(1 + \frac{s}{\tau})^{k} = +45^{\circ}\times k$ at $\omega = 0.1\tau$ if stable, else $-45^{\circ}\times k$. If second-order, i.e., $\left(\frac{1}{(1+2\zeta/\omega_n)}j\omega + \frac{1}{\omega_n^2}(j\omega)^2\right) \rightarrow +\tan^{-1}\left(\frac{\frac{2\zeta\omega}{\omega_{n}}}{1-\left(\frac{\omega}{\omega_{n}}\right)^2}\right) \frac{dB}{dec}$ at $\omega = 0.1\omega_n$. \\ \hline
+    	\textit{Slope} &        ends flat at $\angle 90^{\circ}\times(m_{-} + m_{0} + n_{+}) - 90^{\circ}\times(m_{+} + n_{-} + n_{0})$, \\ \hline
+    \end{tabular}}
+    where $m_{+}/n_{+}$ are number of unstable poles/zeros, $m_{-}/ n_{-}$ stable poles/zeros, $m_{0}/n_{0}$ poles/zeros on imaginary axis.
+    \end{minipage}
+};
+%------------ Bode Plot Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {7.1 Bode Plot};
+\end{tikzpicture}
+
+%------------ Nyquist Stability Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        The curve of $G(j\omega)$ parameterized by the value $\omega \in \Re$ describes the polar plot of the system, i.e., the phase and magnitude on the real and complex plane. The polar plot has a contour $\Gamma$ covering the entire right-hand side of the complex plane from the limit $\rho \rightarrow \infty$.
+    \small{
+    	\begin{tabular}{lp{5.5cm} l} \hline
+    	\textit{Theorem 7.1}  &  If a function $f$ is analytical inside and on the the positively oriented simple closed contour $C$ except at a finite number of poles inside $C$ and $f$ has no zeros on $C$ then
+    	$\frac{1}{2\pi}\Delta_{C}^{0}\textrm{arg}f(s) = \frac{1}{2\pi j} \int_{C}^{} \frac{f'(s)}{f(s)}ds = Z_{C} - P_{c}$,
+    	where $Z_{C}$ is the number of zeros, $P_{C}$ poles inside contour $C$ counting their multiplicities. \\ \hline
+    	\textit{Theorem 7.2}  &  Assume that a transfer function $L(s)$ has no poles on the imaginary axis. For any given $\alpha > 0$ the loop transfer function in negative feedback with static gain controller $\alpha$ is asymptotically stable if and only if the number of counter-clockwise encirclements of the image contour $\Gamma$ around the point $-1/\alpha$ is equal to the number of poles of $L(s)$ on the right-hand side of the complex plane.\\ \hline
+    	\textit{Closed-loop}   & The closed-loop system $L(s)$ is \\ \textit{stability} & asymptotically stable if and only if $Z_{\Gamma} = P_{\Gamma} - \frac{1}{2\pi}\Delta_{\Gamma}^{-\frac{1}{\alpha}} \textrm{arg}L(s) = 0$. \\ \hline
+    \end{tabular}}
+    where $Z_{\Gamma}$ is the number of closed-loop poles and $P_{\Gamma}$ the number of open-loop poles of $L(s)$ inside the contour $\Gamma$, i.e., on the RHP.
+    \end{minipage}
+};
+%------------ Nyquist Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {7.6 Nyquist Stability Criterion};
+\end{tikzpicture}
+
+%------------ Complex Numbers Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        For a complex number in the form $a + jb$,
+    \small{
+    	\begin{tabular}{lp{5.5cm} l} \hline
+    	\textit{Amplitude}  &  $\vert A \vert = \sqrt{a^2 - (jb)^2} = \sqrt{a^2 + b^2}$, \\ & where $j^2 = -1$. \\ \hline
+    	\textit{Phase} &  $\phi = \arctan(\left \frac{b}{a} \right)$, where $\arctan(0) = 0^{\circ}, \arctan(1) = 45^{\circ}, \arctan(\infty) = 90^{\circ}$.
+    \end{tabular}}
+    \end{minipage}
+};
+%------------ Complex Numbers Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Complex Numbers};
 \end{tikzpicture}
 \end{multicols*}
 \end{document}
